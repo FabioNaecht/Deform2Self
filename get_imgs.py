@@ -3,7 +3,7 @@ from PIL import Image
 import os
 
 # === Paths ===
-raw_img_path = '/home/zimadmin/Documents/deconvolution/deform2self/2024_04_22_13_36_random_stim_duration_Anno_image_stack_1104px_43k_10_crop400px.avi'
+raw_img_path = '/home/zimadmin/Documents/deconvolution/deform2self/2024_04_22_13_36_random_stim_duration_Anno_image_stack_1104px_43k_10_crop224px.avi'
 output_dir = './data'
 os.makedirs(output_dir, exist_ok=True)
 

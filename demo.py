@@ -9,6 +9,11 @@ import yaml
 
 if __name__ == '__main__':
 
+    # torch.backends.cudnn.enabled = False
+    # torch.backends.cudnn.deterministic = True
+    # torch.backends.cudnn.benchmark = False
+
+
     # check if gpu with index 0 is available
     if not torch.cuda.is_available():
         print("GPU not available, exiting...")
@@ -53,7 +58,35 @@ if __name__ == '__main__':
     print('saved images')
 
 
-
+# ---------------------------- ERROR ----------------------------
+"""
+Traceback (most recent call last):
+  File "/home/zimadmin/Documents/deconvolution/deform2self/Deform2Self/demo.py", line 42, in <module>
+    denoised = deform2self_sequence(noisy, config) # Tx1xHxW
+  File "/home/zimadmin/Documents/deconvolution/deform2self/Deform2Self/deform2self.py", line 75, in deform2self_sequence
+    denoised.append(deform2self(noisy[i_min:i_max], i-i_min, config))
+  File "/home/zimadmin/Documents/deconvolution/deform2self/Deform2Self/deform2self.py", line 45, in deform2self
+    loss = total_loss(model(noisy_img, idx_tgt), noisy_img, idx_tgt)
+  File "/home/zimadmin/anaconda3/envs/deconvolution/lib/python3.8/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/home/zimadmin/Documents/deconvolution/deform2self/Deform2Self/models.py", line 227, in forward
+    denoise1_img = self.denoise1(input_img) # TN x 1 x H x W
+  File "/home/zimadmin/anaconda3/envs/deconvolution/lib/python3.8/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/home/zimadmin/Documents/deconvolution/deform2self/Deform2Self/models.py", line 180, in forward
+    x = self.convs[0](x)
+  File "/home/zimadmin/anaconda3/envs/deconvolution/lib/python3.8/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/home/zimadmin/Documents/deconvolution/deform2self/Deform2Self/models.py", line 27, in forward
+    x = self.conv(x)
+  File "/home/zimadmin/anaconda3/envs/deconvolution/lib/python3.8/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/home/zimadmin/anaconda3/envs/deconvolution/lib/python3.8/site-packages/torch/nn/modules/conv.py", line 345, in forward
+    return self.conv2d_forward(input, self.weight)
+  File "/home/zimadmin/anaconda3/envs/deconvolution/lib/python3.8/site-packages/torch/nn/modules/conv.py", line 341, in conv2d_forward
+    return F.conv2d(input, weight, self.bias, self.stride,
+RuntimeError: cuDNN error: CUDNN_STATUS_EXECUTION_FAILED
+"""
 
 
 

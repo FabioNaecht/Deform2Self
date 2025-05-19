@@ -5,6 +5,7 @@ from losses_metrics import TotalLoss
 from tqdm import tqdm
     
 def data_augmentation(img, flip_v, flip_h):
+    print('augmenting')
     axis = []
     if flip_v:
         axis.append(2)
@@ -38,6 +39,7 @@ def deform2self(noisy, idx_tgt, config): # Tx1xHxW
     if config['verbose']:
         print('Deform2Self training')
     for _ in tqdm(range(config['num_train']), disable=not config['verbose']):
+        print(f'training {_}')
         flip_v, flip_h = np.random.choice(2, size=2)
         noisy_img = data_augmentation(noisy, flip_v, flip_h) # T x 1 x H x W
         loss = total_loss(model(noisy_img, idx_tgt), noisy_img, idx_tgt)
